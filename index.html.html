@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Tech Fest 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.4; filter: blur(20px); }
+      50% { opacity: 0.8; filter: blur(30px); }
+    }
+
+    @keyframes vine-grow {
+      0% { stroke-dashoffset: 1000; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes firefly {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      50% { opacity: 1; transform: translate(10px, -10px); }
+    }
+
+    @keyframes leaf-sway {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-float-delay { animation: float 6s ease-in-out infinite 2s; }
+    .animate-glow { animation: glow-pulse 3s ease-in-out infinite; }
+    .animate-vine { stroke-dasharray: 1000; animation: vine-grow 3s ease-out forwards; }
+    .animate-firefly { animation: firefly 4s ease-in-out infinite; }
+    .animate-leaf { animation: leaf-sway 4s ease-in-out infinite; }
+
+    .jungle-gradient {
+      background: linear-gradient(135deg, #0a1628 0%, #0d2818 30%, #051a0a 60%, #0a0f1a 100%);
+    }
+
+    .glass-card {
+      background: rgba(10, 30, 20, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+    }
+
+    .neon-border {
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), inset 0 0 20px rgba(0, 255, 136, 0.05);
+    }
+
+    .input-field {
+      background: rgba(0, 20, 10, 0.8);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      border-color: #00ff88;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+      outline: none;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #00ff88 0%, #00cc6a 50%, #009950 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.5);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .circuit-pattern {
+      background-image: 
+        linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .toast {
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .spinner {
+      border: 2px solid rgba(0, 20, 10, 0.3);
+      border-top: 2px solid #001408;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full font-rajdhani">
+  <div id="app-wrapper" class="h-full w-full overflow-auto jungle-gradient circuit-pattern relative"><!-- Animated Background Elements -->
+   <div class="absolute inset-0 overflow-hidden pointer-events-none"><!-- Glowing orbs -->
+    <div class="absolute top-20 left-10 w-64 h-64 rounded-full bg-emerald-500 animate-glow opacity-30"></div>
+    <div class="absolute bottom-40 right-20 w-48 h-48 rounded-full bg-cyan-400 animate-glow opacity-20" style="animation-delay: 1.5s;"></div>
+    <div class="absolute top-1/2 left-1/4 w-32 h-32 rounded-full bg-lime-400 animate-glow opacity-25" style="animation-delay: 0.8s;"></div><!-- Fireflies -->
+    <div class="absolute top-1/4 left-1/3 w-2 h-2 rounded-full bg-yellow-300 animate-firefly"></div>
+    <div class="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-lime-300 animate-firefly" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-1/3 left-1/5 w-2 h-2 rounded-full bg-emerald-300 animate-firefly" style="animation-delay: 2s;"></div>
+    <div class="absolute top-2/3 right-1/3 w-2 h-2 rounded-full bg-cyan-300 animate-firefly" style="animation-delay: 0.5s;"></div>
+    <div class="absolute bottom-1/4 right-1/5 w-2 h-2 rounded-full bg-teal-300 animate-firefly" style="animation-delay: 1.5s;"></div><!-- Floating Leaves SVG -->
+    <svg class="absolute top-10 right-10 w-24 h-24 animate-float" viewbox="0 0 100 100" fill="none"><path d="M50 10 Q70 30 60 60 Q50 80 30 70 Q10 60 20 40 Q30 20 50 10" fill="rgba(0, 255, 136, 0.2)" stroke="rgba(0, 255, 136, 0.4)" stroke-width="1" /> <path d="M50 10 Q50 40 40 65" stroke="rgba(0, 255, 136, 0.3)" stroke-width="1" />
+    </svg>
+    <svg class="absolute bottom-20 left-10 w-20 h-20 animate-float-delay" viewbox="0 0 100 100" fill="none"><path d="M30 20 Q60 10 70 40 Q80 70 50 80 Q20 90 15 60 Q10 30 30 20" fill="rgba(0, 200, 100, 0.15)" stroke="rgba(0, 200, 100, 0.3)" stroke-width="1" />
+    </svg><!-- Circuit Vines SVG -->
+    <svg class="absolute top-0 left-0 w-full h-full" viewbox="0 0 1200 800" preserveaspectratio="none"><path class="animate-vine" d="M0 100 Q100 150 150 100 T300 120 T450 80" stroke="rgba(0, 255, 136, 0.15)" stroke-width="2" fill="none" /> <path class="animate-vine" d="M1200 200 Q1100 250 1050 200 T900 220" stroke="rgba(0, 255, 136, 0.1)" stroke-width="2" fill="none" style="animation-delay: 0.5s;" /> <path class="animate-vine" d="M0 600 Q150 550 200 600 T400 580" stroke="rgba(0, 200, 100, 0.12)" stroke-width="2" fill="none" style="animation-delay: 1s;" /> <!-- Circuit nodes --> <circle cx="150" cy="100" r="4" fill="rgba(0, 255, 136, 0.3)" /> <circle cx="300" cy="120" r="4" fill="rgba(0, 255, 136, 0.3)" /> <circle cx="1050" cy="200" r="4" fill="rgba(0, 255, 136, 0.3)" /> <circle cx="200" cy="600" r="4" fill="rgba(0, 200, 100, 0.3)" />
+    </svg><!-- Decorative Jungle Plants -->
+    <svg class="absolute bottom-0 left-0 w-48 h-64 animate-leaf" viewbox="0 0 200 300"><path d="M100 300 Q80 250 60 200 Q40 150 80 100 Q100 70 120 100 Q160 150 140 200 Q120 250 100 300" fill="rgba(0, 100, 50, 0.4)" stroke="rgba(0, 255, 136, 0.2)" stroke-width="1" /> <path d="M100 300 Q100 200 90 150" stroke="rgba(0, 255, 136, 0.15)" stroke-width="2" />
+    </svg>
+    <svg class="absolute bottom-0 right-0 w-40 h-56 animate-leaf" style="animation-delay: 0.5s;" viewbox="0 0 200 300"><path d="M100 300 Q120 260 140 220 Q170 160 130 110 Q100 80 70 110 Q30 160 60 220 Q80 260 100 300" fill="rgba(0, 80, 40, 0.35)" stroke="rgba(0, 200, 100, 0.2)" stroke-width="1" />
+    </svg>
+   </div><!-- Main Content -->
+   <div class="relative z-10 min-h-full flex flex-col items-center justify-center px-4 py-8 md:py-12"><!-- Header Section -->
+    <div class="text-center mb-8 md:mb-12"><!-- Tech Jungle Icon -->
+     <div class="mb-6 relative inline-block">
+      <svg class="w-20 h-20 md:w-24 md:h-24 mx-auto" viewbox="0 0 100 100" fill="none"><!-- Circuit board base --> <rect x="20" y="20" width="60" height="60" rx="8" stroke="rgba(0, 255, 136, 0.6)" stroke-width="2" fill="rgba(0, 50, 30, 0.5)" /> <!-- Circuit lines --> <path d="M30 50 H45 M55 50 H70" stroke="#00ff88" stroke-width="2" /> <path d="M50 30 V45 M50 55 V70" stroke="#00ff88" stroke-width="2" /> <!-- Central chip with leaf --> <circle cx="50" cy="50" r="12" fill="rgba(0, 255, 136, 0.3)" stroke="#00ff88" stroke-width="2" /> <path d="M50 42 Q55 48 50 55 Q45 48 50 42" fill="#00ff88" /> <!-- Corner nodes --> <circle cx="30" cy="30" r="3" fill="#00ff88" /> <circle cx="70" cy="30" r="3" fill="#00ff88" /> <circle cx="30" cy="70" r="3" fill="#00ff88" /> <circle cx="70" cy="70" r="3" fill="#00ff88" /> <!-- Vine decorations --> <path d="M15 35 Q10 50 20 65" stroke="rgba(0, 200, 100, 0.5)" stroke-width="2" fill="none" /> <path d="M85 35 Q90 50 80 65" stroke="rgba(0, 200, 100, 0.5)" stroke-width="2" fill="none" />
+      </svg>
+      <div class="absolute -inset-4 bg-emerald-400 rounded-full blur-2xl opacity-20 animate-glow"></div>
+     </div>
+     <h1 id="event-title" class="font-orbitron text-3xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-lime-300 to-cyan-400 mb-4 tracking-wider">COLLEGE TECH FEST 2026</h1>
+     <div class="flex items-center justify-center gap-3 mb-4">
+      <div class="h-px w-12 md:w-24 bg-gradient-to-r from-transparent to-emerald-400"></div>
+      <svg class="w-6 h-6 text-emerald-400" viewbox="0 0 24 24" fill="currentColor"><path d="M12 2L9 9H2L7 14L5 21L12 17L19 21L17 14L22 9H15L12 2Z" />
+      </svg>
+      <div class="h-px w-12 md:w-24 bg-gradient-to-l from-transparent to-emerald-400"></div>
+     </div>
+     <p id="event-subtitle" class="text-lg md:text-xl text-emerald-200 font-light tracking-wide">Register Now for Exciting Technical Events</p>
+    </div><!-- Registration Form Card -->
+    <div class="w-full max-w-2xl glass-card neon-border rounded-2xl p-6 md:p-10 relative"><!-- Card corner decorations -->
+     <div class="absolute top-0 left-0 w-16 h-16">
+      <svg viewbox="0 0 64 64" class="w-full h-full"><path d="M0 20 L0 0 L20 0" stroke="rgba(0, 255, 136, 0.5)" stroke-width="2" fill="none" /> <circle cx="0" cy="0" r="3" fill="#00ff88" />
+      </svg>
+     </div>
+     <div class="absolute top-0 right-0 w-16 h-16">
+      <svg viewbox="0 0 64 64" class="w-full h-full"><path d="M64 20 L64 0 L44 0" stroke="rgba(0, 255, 136, 0.5)" stroke-width="2" fill="none" /> <circle cx="64" cy="0" r="3" fill="#00ff88" />
+      </svg>
+     </div>
+     <div class="absolute bottom-0 left-0 w-16 h-16">
+      <svg viewbox="0 0 64 64" class="w-full h-full"><path d="M0 44 L0 64 L20 64" stroke="rgba(0, 255, 136, 0.5)" stroke-width="2" fill="none" /> <circle cx="0" cy="64" r="3" fill="#00ff88" />
+      </svg>
+     </div>
+     <div class="absolute bottom-0 right-0 w-16 h-16">
+      <svg viewbox="0 0 64 64" class="w-full h-full"><path d="M64 44 L64 64 L44 64" stroke="rgba(0, 255, 136, 0.5)" stroke-width="2" fill="none" /> <circle cx="64" cy="64" r="3" fill="#00ff88" />
+      </svg>
+     </div>
+     <form id="registration-form" class="space-y-5"><!-- Row 1: Full Name & Email -->
+      <div class="grid md:grid-cols-2 gap-5">
+       <div class="relative"><label for="fullName" class="block text-emerald-300 text-sm font-semibold mb-2 tracking-wide"> <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          </svg> Full Name </span> </label> <input type="text" id="fullName" name="fullName" required class="input-field w-full px-4 py-3 rounded-lg text-emerald-100 placeholder-emerald-600 font-medium" placeholder="Enter your full name">
+       </div>
+       <div class="relative"><label for="email" class="block text-emerald-300 text-sm font-semibold mb-2 tracking-wide"> <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg> Email Address </span> </label> <input type="email" id="email" name="email" required class="input-field w-full px-4 py-3 rounded-lg text-emerald-100 placeholder-emerald-600 font-medium" placeholder="your.email@example.com">
+       </div>
+      </div><!-- Row 2: Phone & College -->
+      <div class="grid md:grid-cols-2 gap-5">
+       <div class="relative"><label for="phone" class="block text-emerald-300 text-sm font-semibold mb-2 tracking-wide"> <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+          </svg> Phone Number </span> </label> <input type="tel" id="phone" name="phone" required class="input-field w-full px-4 py-3 rounded-lg text-emerald-100 placeholder-emerald-600 font-medium" placeholder="+91 98765 43210">
+       </div>
+       <div class="relative"><label for="college" class="block text-emerald-300 text-sm font-semibold mb-2 tracking-wide"> <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
+          </svg> College Name </span> </label> <input type="text" id="college" name="college" required class="input-field w-full px-4 py-3 rounded-lg text-emerald-100 placeholder-emerald-600 font-medium" placeholder="Your college name">
+       </div>
+      </div><!-- Row 3: Department & Year -->
+      <div class="grid md:grid-cols-2 gap-5">
+       <div class="relative"><label for="department" class="block text-emerald-300 text-sm font-semibold mb-2 tracking-wide"> <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+          </svg> Department </span> </label> <select id="department" name="department" required class="input-field w-full px-4 py-3 rounded-lg text-emerald-100 font-medium cursor-pointer"> <option value="" class="bg-gray-900">Select Department</option> <option value="CSE" class="bg-gray-900">Computer Science &amp; Engineering</option> <option value="IT" class="bg-gray-900">Information Technology</option> <option value="ECE" class="bg-gray-900">Electronics &amp; Communication</option> <option value="EEE" class="bg-gray-900">Electrical &amp; Electronics</option> <option value="MECH" class="bg-gray-900">Mechanical Engineering</option> <option value="CIVIL" class="bg-gray-900">Civil Engineering</option> <option value="AI" class="bg-gray-900">Artificial Intelligence &amp; ML</option> <option value="DS" class="bg-gray-900">Data Science</option> <option value="OTHER" class="bg-gray-900">Other</option> </select>
+       </div>
+       <div class="relative"><label for="year" class="block text-emerald-300 text-sm font-semibold mb-2 tracking-wide"> <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z" />
+          </svg> Year of Study </span> </label> <select id="year" name="year" required class="input-field w-full px-4 py-3 rounded-lg text-emerald-100 font-medium cursor-pointer"> <option value="" class="bg-gray-900">Select Year</option> <option value="1" class="bg-gray-900">1st Year</option> <option value="2" class="bg-gray-900">2nd Year</option> <option value="3" class="bg-gray-900">3rd Year</option> <option value="4" class="bg-gray-900">4th Year</option> <option value="5" class="bg-gray-900">5th Year (Integrated)</option> </select>
+       </div>
+      </div><!-- Row 4: Event Selection -->
+      <div class="relative"><label for="event" class="block text-emerald-300 text-sm font-semibold mb-2 tracking-wide"> <span class="flex items-center gap-2">
+         <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
+         </svg> Event Selection </span> </label> <select id="event" name="event" required class="input-field w-full px-4 py-3 rounded-lg text-emerald-100 font-medium cursor-pointer"> <option value="" class="bg-gray-900">Choose an Event</option> <option value="hackathon" class="bg-gray-900">🌿 Jungle Hackathon - 24hr Coding Challenge</option> <option value="robotics" class="bg-gray-900">🤖 Wild Robotics Championship</option> <option value="ai-ml" class="bg-gray-900">🧠 AI/ML Workshop - Deep Forest Learning</option> <option value="webdev" class="bg-gray-900">🌐 Web Development Bootcamp</option> <option value="cybersec" class="bg-gray-900">🔐 Cyber Security - Jungle Defense CTF</option> <option value="gaming" class="bg-gray-900">🎮 E-Sports Arena Battle</option> <option value="coding" class="bg-gray-900">💻 Competitive Coding Contest</option> <option value="iot" class="bg-gray-900">📡 IoT Innovation Challenge</option> <option value="paper" class="bg-gray-900">📄 Technical Paper Presentation</option> <option value="project" class="bg-gray-900">🚀 Project Exhibition</option> </select>
+      </div><!-- Submit Button -->
+      <div class="pt-4"><button type="submit" id="submit-btn" class="submit-btn w-full py-4 rounded-xl text-gray-900 font-orbitron font-bold text-lg tracking-wider flex items-center justify-center gap-3"> <span id="btn-text">REGISTER NOW</span>
+        <svg id="btn-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+        <div id="btn-spinner" class="spinner hidden"></div></button>
+      </div>
+     </form><!-- Success Message (Hidden by default) -->
+     <div id="success-message" class="hidden mt-6 p-4 rounded-xl bg-emerald-900/50 border border-emerald-500/50 text-center">
+      <svg class="w-12 h-12 mx-auto text-emerald-400 mb-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <h3 class="font-orbitron text-emerald-300 text-xl mb-2">Registration Successful!</h3>
+      <p class="text-emerald-200">Welcome to the jungle! Check your email for confirmation.</p>
+     </div>
+    </div><!-- Footer -->
+    <div class="mt-8 text-center">
+     <p class="text-emerald-400/60 text-sm">© 2026 College Tech Fest • Into the Digital Jungle</p>
+     <div class="flex justify-center gap-4 mt-3"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> <span class="w-2 h-2 rounded-full bg-lime-500 animate-pulse" style="animation-delay: 0.3s;"></span> <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" style="animation-delay: 0.6s;"></span>
+     </div>
+    </div>
+   </div><!-- Toast Container -->
+   <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      event_title: 'COLLEGE TECH FEST 2026',
+      event_subtitle: 'Register Now for Exciting Technical Events',
+      button_text: 'REGISTER NOW',
+      primary_color: '#00ff88',
+      secondary_color: '#0a1628',
+      text_color: '#a7f3d0',
+      accent_color: '#22d3ee',
+      surface_color: '#0a1e14'
+    };
+
+    let config = { ...defaultConfig };
+    let isSubmitting = false;
+    let registrationCount = 0;
+
+    // Toast notification function
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 ${
+        type === 'success' ? 'bg-emerald-900/90 border border-emerald-500/50 text-emerald-200' : 
+        type === 'error' ? 'bg-red-900/90 border border-red-500/50 text-red-200' :
+        'bg-amber-900/90 border border-amber-500/50 text-amber-200'
+      }`;
+      
+      const icon = type === 'success' ? '✓' : type === 'error' ? '✗' : '⚠';
+      toast.innerHTML = `<span class="font-bold">${icon}</span><span>${message}</span>`;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // Update UI based on config
+    function updateUI() {
+      const titleEl = document.getElementById('event-title');
+      const subtitleEl = document.getElementById('event-subtitle');
+      const btnTextEl = document.getElementById('btn-text');
+
+      if (titleEl) titleEl.textContent = config.event_title || defaultConfig.event_title;
+      if (subtitleEl) subtitleEl.textContent = config.event_subtitle || defaultConfig.event_subtitle;
+      if (btnTextEl && !isSubmitting) btnTextEl.textContent = config.button_text || defaultConfig.button_text;
+    }
+
+    // Data handler for SDK
+    const dataHandler = {
+      onDataChanged(data) {
+        registrationCount = data.length;
+        // Could display registration count if needed
+      }
+    };
+
+    // Element SDK implementation
+    const elementImpl = {
+      defaultConfig,
+      
+      async onConfigChange(newConfig) {
+        config = { ...defaultConfig, ...newConfig };
+        updateUI();
+      },
+
+      mapToCapabilities(cfg) {
+        return {
+          recolorables: [
+            {
+              get: () => cfg.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                cfg.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => cfg.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                cfg.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                cfg.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                cfg.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        };
+      },
+
+      mapToEditPanelValues(cfg) {
+        return new Map([
+          ['event_title', cfg.event_title || defaultConfig.event_title],
+          ['event_subtitle', cfg.event_subtitle || defaultConfig.event_subtitle],
+          ['button_text', cfg.button_text || defaultConfig.button_text]
+        ]);
+      }
+    };
+
+    // Form submission handler
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      if (isSubmitting) return;
+      
+      // Check data limit
+      if (registrationCount >= 999) {
+        showToast('Registration limit reached. Please contact organizers.', 'warning');
+        return;
+      }
+
+      const form = e.target;
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnIcon = document.getElementById('btn-icon');
+      const btnSpinner = document.getElementById('btn-spinner');
+      const successMsg = document.getElementById('success-message');
+
+      // Get form data
+      const formData = {
+        full_name: form.fullName.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        college: form.college.value.trim(),
+        department: form.department.value,
+        year: form.year.value,
+        event: form.event.value,
+        registered_at: new Date().toISOString()
+      };
+
+      // Validation
+      if (!formData.full_name || !formData.email || !formData.phone || 
+          !formData.college || !formData.department || !formData.year || !formData.event) {
+        showToast('Please fill in all required fields.', 'error');
+        return;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        showToast('Please enter a valid email address.', 'error');
+        return;
+      }
+
+      // Show loading state
+      isSubmitting = true;
+      submitBtn.disabled = true;
+      btnText.textContent = 'REGISTERING...';
+      btnIcon.classList.add('hidden');
+      btnSpinner.classList.remove('hidden');
+
+      try {
+        const result = await window.dataSdk.create(formData);
+        
+        if (result.isOk) {
+          // Show success
+          form.classList.add('hidden');
+          successMsg.classList.remove('hidden');
+          showToast('Registration successful! Welcome to Tech Fest 2026!', 'success');
+          
+          // Reset after delay
+          setTimeout(() => {
+            form.reset();
+            form.classList.remove('hidden');
+            successMsg.classList.add('hidden');
+          }, 5000);
+        } else {
+          showToast('Registration failed. Please try again.', 'error');
+        }
+      } catch (error) {
+        showToast('An error occurred. Please try again.', 'error');
+      } finally {
+        // Reset button state
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        btnText.textContent = config.button_text || defaultConfig.button_text;
+        btnIcon.classList.remove('hidden');
+        btnSpinner.classList.add('hidden');
+      }
+    }
+
+    // Initialize
+    async function init() {
+      // Initialize Element SDK
+      if (window.elementSdk) {
+        window.elementSdk.init(elementImpl);
+      }
+
+      // Initialize Data SDK
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Failed to initialize Data SDK');
+        }
+      }
+
+      // Set up form handler
+      const form = document.getElementById('registration-form');
+      if (form) {
+        form.addEventListener('submit', handleSubmit);
+      }
+
+      // Initial UI update
+      updateUI();
+    }
+
+    init();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c202840d1d64424',t:'MTc2OTA5NjUwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
